@@ -1,0 +1,210 @@
+<style>
+
+    
+
+    #bosses {
+        height: 100%;
+        overflow: hidden;
+
+        padding: 0px 10px;
+
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat; 
+
+        display: grid;
+        grid-template-columns: 5% 40% 50% 5%;
+        align-items: end;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.2); 
+            z-index: 1;
+        }
+
+        & > #transition {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            overflow: hidden;
+
+            & > #transitionCanvas {
+                transform: scale(1.05);
+
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        & * {
+            z-index: 2;
+        }
+    }
+
+    #bosses > .controlButton {
+        margin-bottom: 200px;
+        filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.5));
+        transition: 0.3s ease;
+        z-index: 100;
+
+        &:hover {
+            filter: drop-shadow(5px 5px 15px rgba(0, 0, 0, 0.8));
+            transform: translate(-7px, -7px) scale(1.1);
+        }
+        &:first-of-type:hover {
+            transform: translate(7px, -7px) scale(1.1);
+        }
+
+        & > img {
+            display: block;
+            margin: 0px auto;
+            width: 80%;
+            
+        }
+    } 
+
+    #bosses > #bossCover, #bosses > #bossDescription {
+        margin-bottom: 100px;
+        padding: 30px;
+    }
+
+    #bosses > #bossCover {
+        height: 100%;
+
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        & > canvas {
+            transform: scale(1.4);
+
+            filter: brightness(1.07) drop-shadow(0 0 10px rgba(255, 255, 255, 1));
+        }
+    }
+
+    #bosses > #bossDescription {
+        height: calc(100% - 200px);
+
+        & > div {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+
+            height: 100%;
+            border-radius: 30px;
+            padding: 30px;
+
+            background-color: #000000aa;
+            color: white;
+            text-align: center;
+            text-transform: uppercase;
+
+            box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.8);
+
+            & h1 {
+                font-size: 3.3em;
+                margin-bottom: 0.2em;
+                text-shadow: 
+                    -3px -3px 0 black,
+                    3px -3px 0 black,
+                    -3px  3px 0 black,
+                    3px  3px 0 black;
+            }
+
+            & h3 {
+                font-size: 1.6em;
+                text-shadow: 
+                    -3px -3px 0 black,
+                    3px -3px 0 black,
+                    -3px  3px 0 black,
+                    3px  3px 0 black;
+            }
+
+            & {
+                font-size: 1.5em;
+                font-weight: bold;
+            }
+        }
+    }
+
+    #bosses #exit {
+        display: inline-block;
+        position: absolute;
+        top: calc(100% - 70px);
+        left: calc(100% - 100px);
+
+        z-index: 100;
+
+        text-align: center;
+
+        & #exitButton {
+            display: inline-block;
+            position: relative;
+            transition: 0.2s;
+
+            font-weight: bold;
+            font-size: 2.2em;
+            text-transform: uppercase;
+
+            color: #f2e3c6;
+            cursor: pointer;
+        
+            &:hover{
+                transition: 0.2s;
+                transform: translate(5px, -5px) scale(1.1);
+                color: #CB6347;
+                text-shadow: #474747 3px 5px 2px;
+            }
+        }
+    }
+</style>
+
+<div id="bosses">
+    <div class="controlButton" id="previousButton">
+        <img src="/assets/bosses/left.png" alt="">
+    </div>
+
+    <div id="bossCover">
+        <canvas id="bossCanvas" width="600" height="800"></canvas>
+    </div>
+
+    <div id="bossDescription">
+        <div>
+            <div>
+                <h1 id="name"></h1>
+                <p id="phrase"></p>
+                <br>
+                <p id="description"></p>
+            </div>
+            <div>
+                <h3 id="difficulty"></h3>
+                <h3 id="location"></h3>
+                <h3 id="specialMove"></h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="controlButton" id="nextButton">
+        <img src="/assets/bosses/right.png" alt="">
+    </div>
+
+    <div id="exit">
+        <span id="exitButton">Exit</span>
+    </div>
+
+    <div id="transition">
+        <canvas id="transitionCanvas"></canvas>
+    </div>
+</div>
+
+<audio id="bossesBackgroundMusic" loop>
+    <source src="/assets/bosses/background.mp3" type="audio/mp3">
+</audio>

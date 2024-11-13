@@ -1,0 +1,223 @@
+<style>
+    #shop {
+        position: relative;
+
+        width: 100vw;
+        height: 100vh;
+
+        background-image: url("/assets/shop/background.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        & #shopkeeper{
+            position: absolute; 
+            top: 0%; 
+            left: 35%;
+        }
+
+        & #coinsCanvas{
+            position: absolute;
+            top: -60px;
+            left: -60px;
+        }
+
+        & #coins > img{
+            position: absolute;
+            top: 70px;
+            left: 125px;
+        }
+    }
+
+    #shop #itemList {
+        position: absolute;
+        top: calc(25% - 20px);
+        left: 300px;
+
+        display: grid; 
+        grid-template-columns: repeat(3, 1fr);
+        align-items: end;
+        gap: 40px;
+        width: 430px;
+        
+        & > .item {
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease;
+
+            &.active > img {
+                filter: brightness(2.2) drop-shadow(0 0 10px rgba(255, 255, 255, 1));
+            }
+        }
+
+        & > .item:nth-child(-n+3) {
+            z-index: 0;
+        }
+
+        & > .item > img {
+            width: 90%;
+            height: auto;
+            display: block;
+        }
+
+        & > .item:nth-child(-n+3) {
+            margin-bottom: -230px;
+            transform: translateX(-70px);
+        }
+
+        & > .item:hover{
+            transform: translateY(-50px);
+        }
+        & > .item:nth-child(-n+3):hover {
+            transform: translate(-70px, -50px);
+        }
+
+        & > .item:nth-child(-n+3) > img {
+            width: 120%;
+        }
+    }
+
+    #shop #itemDescription {
+        width: 813px;
+        height: 260px;
+
+        position: relative;
+        top: 66%;
+        left: 5.5%;
+
+        border-radius: 1em;
+        background-color: black !important;
+        background: url(/assets/shop/bg.png);
+
+        & > #door {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            height: 100%;
+
+            z-index: 100;
+
+            & > img {
+                position: absolute;
+                top: 0;
+                left: 0;
+
+                width: 102%;
+                transform: translate(-1%, -6%);
+                transition: transform 0.5s ease;
+            }
+
+            &.active > img {
+                transition: transform 0.5s ease;
+                transform: translate(calc(-100% + 75px), -6%);
+            }
+        }
+
+        & > #display {
+            position: absolute;
+            top: 0;
+            left: 75px;
+
+            width: calc(100% - 75px);
+            padding: 20px 5px;
+
+            color: white;
+            text-align: center;
+            text-transform: uppercase;
+
+            & > h1 {
+                font-size: 3.3em;
+                text-shadow: 
+                    -3px -3px 0 black,
+                    3px -3px 0 black,
+                    -3px  3px 0 black,
+                    3px  3px 0 black;
+            }
+
+            & > h2 {
+                font-size: 1.8em;
+                text-shadow: 
+                    -3px -3px 0 black,
+                    3px -3px 0 black,
+                    -3px  3px 0 black,
+                    3px  3px 0 black;
+            }
+
+            & {
+                font-size: 1.1em;
+            }
+        }
+    }
+
+    #shop #exit {
+        display: inline-block;
+        position: absolute;
+        top: calc(100% - 70px);
+        left: calc(100% - 100px);
+
+        z-index: 100;
+
+        text-align: center;
+
+        & #exitButton {
+            display: inline-block;
+            position: relative;
+            transition: 0.2s;
+
+            font-weight: bold;
+            font-size: 2.2em;
+            text-transform: uppercase;
+
+            color: #f2e3c6;
+            cursor: pointer;
+        
+            &:hover{
+                transition: 0.2s;
+                transform: translate(5px, -5px) scale(1.1);
+                color: #CB6347;
+                text-shadow: #474747 3px 5px 2px;
+            }
+        }
+    }
+
+</style>
+
+<div id="shop">
+    <div id="shopkeeper">
+        <canvas id="shopkeeperCanvas" width="960" height="960"></canvas>
+    </div>
+    
+    <div id="coins">
+        <canvas id="coinsCanvas" width="800" height="400"></canvas>
+        <img src="/assets/shop/coin_number.png" alt="">
+    </div>
+    
+    <div id="itemList">
+
+    </div>
+
+    <div id="itemDescription">
+        <div id="door">
+            <img src="/assets/shop/door.png" alt="">
+        </div>
+
+        <div id="display">
+            <h1></h1>
+            <h2></h2>
+            <p></p>
+        </div>
+    </div>
+
+    <div id="exit">
+        <span id="exitButton">Exit</span>
+    </div>
+</div>
+
+<audio id="shopBackgroundMusic" loop>
+    <source src="/assets/shop/shop_background_music.mp3" type="audio/mp3">
+</audio>
+<audio id="shopWelcomeMusic">
+    <source src="/assets/shop/shop_welcome.mp3" type="audio/mp3">
+</audio>
+<audio id="shopGoodbyeMusic">
+    <source src="/assets/shop/shop_goodbye.mp3" type="audio/mp3">
+</audio>
